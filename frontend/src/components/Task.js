@@ -5,6 +5,8 @@ import axios from 'axios';
 const Task = ({ task }) => {
 
     const [selectedTask, setSelectedTask] = useState([]);
+    const [doneTask, setDoneTask] = useState('white');
+
 
     const handleEdit = async (event) => {
         event.preventDefault();
@@ -13,11 +15,14 @@ const Task = ({ task }) => {
             .then((res) => {
                 //setTask(task.concat(newTask));
                 console.log("tasks: ", task);
+                setDoneTask('whitesmoke');
             })
             .catch((err) => {
                 console.log(err);                
             });
     }
+
+
 
     const handleDelete = async (event) => {
         event.preventDefault();
@@ -26,6 +31,10 @@ const Task = ({ task }) => {
             .then((res) => {
                 //setTask(task.concat(newTask));
                 console.log("tasks: ", task);
+
+                
+
+                
             })
             .catch((err) => {
                 console.log(err);                
@@ -53,7 +62,7 @@ const Task = ({ task }) => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
-                        <div className="card my-3">
+                        <div className='card my-3' style={{backgroundColor: `${doneTask}`}}  >
                             <div className="card-body">
                                 <p className="card-text">
                                     {task.description}
@@ -70,18 +79,18 @@ const Task = ({ task }) => {
                                                     ></input>
                                             </form>
                                         </div>
-
-                                        <div className="col">
-
-                                            <form>
-                                                <input 
-                                                    type="submit" 
-                                                    value="Done"
-                                                    className="btn btn-warning"
-                                                    onClick={handleEdit}
-                                                    ></input>
-                                            </form>
-                                        </div>
+                                        { task.status === 'pending'?
+                                            <div className="col">
+                                                <form>
+                                                    <input 
+                                                        type="submit" 
+                                                        value="Done"
+                                                        className="btn btn-warning"
+                                                        onClick={handleEdit}
+                                                        ></input>
+                                                </form>
+                                            </div>  : null} 
+                                        
                                         <div className="col">
                                             <form>
                                                 <input 

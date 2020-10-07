@@ -6,7 +6,9 @@ import Task from './Task'
 const TasksList = () => {
 
 
-    const [task, setTask] = useState([]);
+    const [task, setTask] = useState(
+        [{description: ''}]
+    );
 
     const [newTask, setNewTask] = useState({
         description: ''
@@ -14,20 +16,23 @@ const TasksList = () => {
 
 
     const getTasks = async () => {
-        const resultTasks = await axios(
-            'http://localhost:4000/api/tasks'
-        );
-        setTask(resultTasks.data)
-        console.log(resultTasks.data);
+        
+        const apiCall = await fetch('http://localhost:4000/api/tasks');
+        const tasks = await apiCall.json();
+
+        console.log('tasks status', tasks.status);
+
+
+        setTask(tasks);
     }
 
     useEffect(() => {
         getTasks();
-    }, [])
+    }, [task])
 
     
-    const handleChange=e=>{
-        const {name, value} = e.target;
+    const handleChange= (event)=>{
+        const {name, value} = event.target;
         setNewTask(prevState => ({
             ...prevState,
             [name]: value
@@ -35,10 +40,9 @@ const TasksList = () => {
         console.log('new description: ', newTask);
     }
 
-    const saveTask = async () => {
-        await axios.post(`http://localhost:4000/api/tasks/`, newTask)
+    const saveTask = () => {
+        axios.post(`http://localhost:4000/api/tasks/`, newTask)
             .then((res) => {
-                //setTask(task.concat(newTask));
                 console.log("tasks: ", task);
             })
             .catch((err) => {
@@ -84,7 +88,9 @@ const TasksList = () => {
             </div> 
             {
                 task.map((task, i) => (
-                    <Task key={i} task={task}></Task>
+                    <Task key={i} 
+                    task={task}
+                    ></Task>
                 ))
             }
         </>

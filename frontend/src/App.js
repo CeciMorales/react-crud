@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Header from './components/Header';
 import TasksList from './components/TasksList'
+import TaskDetail from './components/TaskDetail'
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
             <Route exact path="/">
               <Header/>
               <TasksList/>
+            </Route>
+            <Route exact path="/:id">
+              <TaskDetail />
             </Route>
           </Switch>
       </div>
