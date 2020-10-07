@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const Task = ({ task }) => {
 
-    const [selectedTask, setSelectedTask] = useState([]);
     const [doneTask, setDoneTask] = useState('white');
 
 
@@ -40,21 +39,6 @@ const Task = ({ task }) => {
                 console.log(err);                
             });
     }
-
-    const getTask = async () => {
-
-        const resultTask = await axios(
-            `http://localhost:4000/api/tasks/${task.id}`
-        );
-
-        // console.log(resultTask.data);
-        setSelectedTask(resultTask.data);
-        console.log(selectedTask);
-    }
-
-    useEffect(() => {
-        getTask();
-    }, [])
         
 
     return (
@@ -70,14 +54,12 @@ const Task = ({ task }) => {
                                 <div className="container">
                                     <div className="row">
                                         <div className="col">
-                                            <form>
-                                                <input 
-                                                    type="submit" 
-                                                    value="View"
+                                            <Link to={`/${task.id}`}>
+                                            
+                                                <button 
                                                     className="btn btn-primary"
-                                                    onClick={getTask}
-                                                    ></input>
-                                            </form>
+                                                >View</button>
+                                            </Link>
                                         </div>
                                         { task.status === 'pending'?
                                             <div className="col">

@@ -16,6 +16,7 @@ import TaskDetail from './components/TaskDetail'
 
 function App() {
   return (
+    
     <BrowserRouter>
       <div className="container">
           <Switch>
@@ -24,6 +25,7 @@ function App() {
               <TasksList/>
             </Route>
             <Route exact path="/:id">
+              <Header/>
               <TaskDetail />
             </Route>
           </Switch>

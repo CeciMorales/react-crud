@@ -1,19 +1,43 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom'
+import axios from 'axios';
+import { useParams } from "react-router-dom";  
 
-const TaskDetail = (task) => {
+const TaskDetail = () => {
+
+    const [selectedTask, setSelectedTask] = useState([]);
+
+    
+    // obtener datos de la url 
+    let { id } = useParams(); 
+    console.log('id individual: ', id);
+
+    const getTask = async () => {
+
+        const resultTask = await axios(
+            `http://localhost:4000/api/tasks/${id}`
+        );
+
+        // console.log(resultTask.data);
+        setSelectedTask(resultTask.data);
+        console.log(selectedTask);
+    }
+
+    useEffect(() => {
+        getTask();
+    }, [])
+    
     return (
         <>
-            <div className="card text-center">
+            <div className="card text-center mt-5">
             <div className="card-header">
-                Featured
+                id: {selectedTask.id}
             </div>
             <div className="card-body">
-                <h5 className="card-title">Special title treatment</h5>
-                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+                <p className="card-text">{selectedTask.description}</p>
             </div>
             <div className="card-footer text-muted">
-                2 days ago
+                estatus: {selectedTask.status}
             </div>
             </div>
         </>
