@@ -7,12 +7,12 @@ const TasksList = () => {
 
 
     const [task, setTask] = useState(
-        [{description: ''}]
+        []
     );
 
-    const [newTask, setNewTask] = useState({
-        description: ''
-    })
+    const [newTask, setNewTask] = useState(
+        []
+    )
 
 
     const getTasks = async () => {

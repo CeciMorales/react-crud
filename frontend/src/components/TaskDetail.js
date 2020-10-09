@@ -30,15 +30,23 @@ const TaskDetail = () => {
     return (
         <>
             <div className="card text-center mt-5">
-            <div className="card-header">
-                id: {selectedTask.id}
-            </div>
-            <div className="card-body">
-                <p className="card-text">{selectedTask.description}</p>
-            </div>
-            <div className="card-footer text-muted">
-                estatus: {selectedTask.status}
-            </div>
+                <div className="card-header">
+                    id: {selectedTask.id}
+                </div>
+                {selectedTask.status === 'pending' 
+                ?
+                    <div className="card-body">
+                        <p className="card-text">{selectedTask.description}</p>
+                    </div>
+                :
+                    <div className="card-body bg-light">
+                        <p className="card-text">{selectedTask.description}</p>
+                    </div>
+                }
+                
+                <div className="card-footer text-muted">
+                    estatus: {selectedTask.status}
+                </div>
             </div>
         </>
     )

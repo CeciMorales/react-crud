@@ -6,7 +6,10 @@ taskCtrl.showTasks = async (req, res) => {
         .then((data) => {
             let tasks = data;
             res.json(tasks);
-        });
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }
 
 taskCtrl.showTask = async (req, res) => {
@@ -17,7 +20,10 @@ taskCtrl.showTask = async (req, res) => {
         .then((data) => {
             let task = data;
             res.json(task);
-        });
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }
 
 taskCtrl.createTask = async (req, res) => {
@@ -37,7 +43,10 @@ taskCtrl.doneTask = async (req, res) => {
         .then(() => {
             console.log('Task is done with id: ', task.id);
             res.json('Task done');
-    })
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }
 
 taskCtrl.deleteTask = async (req, res) => {
@@ -47,7 +56,11 @@ taskCtrl.deleteTask = async (req, res) => {
         .then(() => {
             console.log('Task deleted: ', task.id);
             res.json('Task deleted');
-    });
+        
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }
 
 module.exports = taskCtrl;

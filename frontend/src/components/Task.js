@@ -39,6 +39,8 @@ const Task = ({ task }) => {
                 console.log(err);                
             });
     }
+
+    
         
 
     return (
@@ -46,22 +48,22 @@ const Task = ({ task }) => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
-                        <div className='card my-3' style={{backgroundColor: `${doneTask}`}}  >
-                            <div className="card-body">
-                                <p className="card-text">
-                                    {task.description}
-                                </p>
-                                <div className="container">
-                                    <div className="row">
-                                        <div className="col">
-                                            <Link to={`/${task.id}`}>
-                                            
-                                                <button 
-                                                    className="btn btn-primary"
-                                                >View</button>
-                                            </Link>
-                                        </div>
-                                        { task.status === 'pending'?
+                        { task.status === 'pending'
+                        ?
+                            <div className='card my-3'>
+                                <div className="card-body">
+                                    <p className="card-text">
+                                        {task.description}
+                                    </p>
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col">
+                                                <Link to={`/${task.id}`}>
+                                                    <button 
+                                                        className="btn btn-primary"
+                                                    >View</button>
+                                                </Link>
+                                            </div>
                                             <div className="col">
                                                 <form>
                                                     <input 
@@ -69,25 +71,57 @@ const Task = ({ task }) => {
                                                         value="Done"
                                                         className="btn btn-warning"
                                                         onClick={handleEdit}
-                                                        ></input>
-                                                </form>
-                                            </div>  : null} 
-                                        
-                                        <div className="col">
-                                            <form>
-                                                <input 
-
-                                                    type="submit" 
-                                                    value="Delete"
-                                                    className="btn btn-danger"
-                                                    onClick={handleDelete}
                                                     ></input>
-                                            </form>
-                                        </div>
-                                    </div> 
+                                                </form>
+                                            </div> 
+                                            <div className="col">
+                                                <form>
+                                                    <input 
+                                                        type="submit" 
+                                                        value="Delete"
+                                                        className="btn btn-danger"
+                                                        onClick={handleDelete}
+                                                    ></input>
+                                                </form>
+                                            </div>
+                                        </div> 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        :
+                            <div className='card my-3 bg-light'>
+                                <div className="card-body">
+                                    <p className="card-text">
+                                        {task.description}
+                                    </p>
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col">
+                                                <Link to={`/${task.id}`}>
+                                                
+                                                    <button 
+                                                        className="btn btn-primary"
+                                                    >View</button>
+                                                </Link>
+                                            </div>
+                                            <div className="col">
+                                                
+                                            </div>
+                                            <div className="col">
+                                                <form>
+                                                    <input 
+                                                        type="submit" 
+                                                        value="Delete"
+                                                        className="btn btn-danger"
+                                                        onClick={handleDelete}
+                                                        ></input>
+                                                </form>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>   
             </div>
